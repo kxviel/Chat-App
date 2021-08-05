@@ -1,0 +1,26 @@
+@keyframes nameEaseIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+  0% {
+    transform: translateX(1.4rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatBrand {
+  0% {
+    transform: translate(-30%, 0);
+  }
+  50% {
+    text-shadow: 14px 0px 7px rgba(150, 150, 150, 1);
+    color: #ee3d5d;
+  }
+  100% {
+    transform: translate(30%, 0);
+  }
+}

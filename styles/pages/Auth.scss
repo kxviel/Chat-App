@@ -1,0 +1,47 @@
+@import "../constants/animations";
+@import "../constants/base";
+@import "../constants/mixins";
+@import "../constants/variables";
+@import "../constants/fonts";
+
+.auth-root {
+  height: 100vh;
+  background-image: linear-gradient(to right bottom, #000000cc, #250016cc),
+    url("../../public/landing.jpg");
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  .header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backface-visibility: hidden;
+    text-align: center;
+    .my-brand {
+      font-family: "Noto Serif JP", serif;
+      color: white;
+      & span {
+        font-size: 4rem;
+        animation: floatBrand 3s ease-in-out 0.7s infinite;
+      }
+      @for $i from 0 to 2 {
+        & span:nth-child(#{$i + 1}) {
+          animation-delay: #{$i + 1.4}s;
+        }
+      }
+    }
+    .login {
+      margin-top: 2.1rem;
+      border: none;
+      padding: 1rem;
+      border-radius: 2.1rem;
+      transition: ease-in 0.1s;
+      &:hover {
+        transform: translateY(-0.1rem);
+        cursor: pointer;
+        box-shadow: 0 0.3rem 0.7rem rgba(150, 150, 150, 1);
+      }
+    }
+  }
+}

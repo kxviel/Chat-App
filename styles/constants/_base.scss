@@ -1,0 +1,32 @@
+@import "./mixins";
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  @include respond(tab-land) {
+    // width < 1200?
+    font-size: 56.25%;
+  }
+
+  @include respond(tab-port) {
+    // width < 900?
+    font-size: 50%;
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%;
+  }
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.7;
+  box-sizing: border-box;
+}
