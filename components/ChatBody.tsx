@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { myFirestore } from "../services/Firebase";
 import Bubbles from "./Bubbles";
 
 interface ChatBodyProps {
@@ -9,6 +10,15 @@ interface ChatBodyProps {
 const ChatBody = (props: ChatBodyProps) => {
   const { register, handleSubmit } = useForm();
   const [myMessages, setMessages] = useState<any>([]);
+  useEffect(() => {
+    myFirestore
+      .collection("messages")
+      .orderBy("timeStamp")
+      .limit(50)
+      .onSnapshot((snapShot) => {
+        setMessages(snapShot.docs.map((x) => x.data()));
+      });
+  }, []);
   const onMessageSend = async (data: any) => {
     if (data.text.length) {
       const messageToSend = {

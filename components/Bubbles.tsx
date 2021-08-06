@@ -5,9 +5,9 @@ interface BubbleProps {
 const Bubbles = (props: BubbleProps) => {
   return (
     <>
-      {props.data.map((x: any, i: any) => (
+      {props.data.map(({ id, text, photoURL }: any, i: any) => (
         <div key={i} className="message">
-          {x.text}
+          {text}
         </div>
       ))}
     </>
