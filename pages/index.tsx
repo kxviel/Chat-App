@@ -1,15 +1,13 @@
-import Head from "next/head";
-import firebase from "firebase/app";
 import { myFireauth } from "../services/Firebase";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import ChatScreen from "../components/ChatScreen";
 import Landing from "../components/Landing";
+import { useEffect, useState } from "react";
+import firebase from "firebase/app";
+import Head from "next/head";
 
 export default function Home() {
   const [user, setUser] = useState(() => myFireauth.currentUser);
   const [init, setInit] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const unsuscribe = myFireauth.onAuthStateChanged((user) => {
