@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { myFirestore } from "../services/Firebase";
+import { myFireauth, myFirestore } from "../services/Firebase";
 import Bubbles from "./Bubbles";
+import firebase from "firebase";
 
 interface ChatBodyProps {
   selectedFriend: any;
@@ -20,18 +21,15 @@ const ChatBody = (props: ChatBodyProps) => {
       });
   }, []);
   const onMessageSend = async (data: any) => {
+    const { uid, photoURL }: any = myFireauth.currentUser;
+
     if (data.text.length) {
       const messageToSend = {
-        // uniqueRoomId: props.commonId,
-        // from: props.auth.responseData.userEmail,
-        // to: props.data.clickedUserEmail,
+        from: uid,
         text: data.text,
-        timeStamp: new Date().toLocaleTimeString(navigator.language, {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
+        timeStamp: await firebase.firestore.FieldValue.serverTimestamp(),
       };
-      setMessages((myMessages: any) => [...myMessages, messageToSend]);
+      await myFirestore.collection("messages").add(messageToSend);
     } else {
       alert("Enter a Valid Message Bitch");
     }
@@ -39,7 +37,9 @@ const ChatBody = (props: ChatBodyProps) => {
   return (
     <>
       <div className="chat-area">
-        <div className="header">{props.selectedFriend}</div>
+        <div className="header">
+          {props.selectedFriend ?? "Welcome to C Y N E F I N"}
+        </div>
         <div className="display">
           <Bubbles data={myMessages} />
         </div>
