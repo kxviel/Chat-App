@@ -25,6 +25,8 @@ export default function Home() {
   }, [init]);
 
   const signInWithGoogle = async () => {
+    console.log("D");
+
     const provider = new firebase.auth.GoogleAuthProvider();
     myFireauth.useDeviceLanguage();
     try {
@@ -32,6 +34,7 @@ export default function Home() {
     } catch (err) {
       console.log(err);
     }
+    console.log("S");
   };
 
   if (init) return <div>Loading</div>;
@@ -41,7 +44,7 @@ export default function Home() {
         <title>C Y N E F I N</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {user ? <ChatScreen /> : <Landing signIn={() => signInWithGoogle} />}
+      {user ? <ChatScreen /> : <Landing signIn={() => signInWithGoogle()} />}
     </>
   );
 }

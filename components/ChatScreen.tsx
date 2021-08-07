@@ -27,10 +27,13 @@ const ChatScreen = () => {
   return (
     <>
       <div className="home">
-        <div className="appbar">Cynefin</div>
+        <div className="appbar">
+          <p>Cynefin</p>
+          <button onClick={() => myFireauth.signOut()}>SignOut</button>
+        </div>
         <div className="main">
           <Friends onFriendClick={(data: any) => setCurrentFriend(data)} />
-          <ChatBody selectedFriend={currentFriend.displayName} />
+          <ChatBody selectedFriend={currentFriend.name} />
         </div>
       </div>
     </>
