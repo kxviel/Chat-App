@@ -19,11 +19,12 @@
     @include flexBox(row, space-between, center);
     button {
       border: none;
-      padding: 0.4rem;
-      border-radius: 0.2rem;
-      transition: ease-in;
+      padding: 1rem;
+      border-radius: 1.4rem;
+      transition: ease-in 0.1s;
       &:hover {
         transform: translateY(-0.1rem);
+        cursor: pointer;
       }
     }
   }
@@ -37,11 +38,17 @@
       padding: 0.7rem;
       @include flexBox(column, space-between, center);
       .header {
-        background-color: #000;
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0.8rem 3.2rem 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(0.7rem);
+        -webkit-backdrop-filter: blur(0.7rem);
+        border-radius: 1rem;
+        border: 0.1rem solid rgba(255, 255, 255, 0.18);
         color: white;
         width: 100%;
         height: 10vh;
         font-size: 2.2rem;
+        border-radius: 1rem;
         @include flexBox(row, center, center);
       }
       .display {
@@ -49,6 +56,10 @@
         width: 100%;
         padding: 1rem;
         font-size: 1.4rem;
+        .holder {
+          display: grid;
+          place-items: center;
+        }
         @include flexBox(column, none, none);
         // i recieve
         .message-to {
@@ -58,7 +69,7 @@
           padding: 1rem;
           color: #000;
           margin: 0.5rem 0;
-          border-radius: 20px 20px 20px 3px;
+          border-radius: 2rem 2rem 2rem 0.3rem;
         }
         // Im sending
         .message-from {
@@ -69,18 +80,33 @@
           padding: 1rem;
           color: #000;
           align-self: flex-end;
-          border-radius: 20px 20px 3px 20px;
+          border-radius: 2rem 2rem 0.3rem 2rem;
         }
       }
       .textarea {
-        background-color: #000;
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0.8rem 3.2rem 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(0.7rem);
+        -webkit-backdrop-filter: blur(0.7rem);
+        border-radius: 1rem;
+        border: 0.1rem solid rgba(255, 255, 255, 0.18);
         color: white;
         width: 100%;
         height: 15vh;
         @include flexBox(row, space-around, center);
+        .send-btn {
+          border: none;
+          padding: 1rem;
+          border-radius: 1.4rem;
+          transition: ease-in 0.1s;
+          &:hover {
+            transform: translateY(-0.1rem);
+            cursor: pointer;
+          }
+        }
         .text-area {
           width: 70%;
-          height: 70%;
+          height: 50%;
           border-radius: 1.4rem;
           padding: 1rem;
           border: none;
@@ -106,6 +132,9 @@
         @include flexBox(row, space-around, center);
         margin-bottom: 0.7rem;
         font-size: 2rem;
+        .dp {
+          border-radius: 50%;
+        }
       }
     }
   }

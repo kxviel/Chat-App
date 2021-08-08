@@ -20,7 +20,13 @@ const Friends = (props: FriendProps) => {
     <div className="chats">
       {list.map((x: any, i: any) => (
         <div onClick={() => props.onFriendClick(x)} className="chat" key={i}>
-          <Image height="35" width="35" src={x.photoURL} alt="dp" />
+          <Image
+            className="dp"
+            height="35"
+            width="35"
+            src={x.photoURL}
+            alt="dp"
+          />
           {x.name}
         </div>
       ))}

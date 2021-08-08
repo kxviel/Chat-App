@@ -50,31 +50,31 @@ const ChatBody = (props: ChatBodyProps) => {
   return (
     <>
       <div className="chat-area">
-        <div className="header">
-          {props.selectedFriend[0] ?? "Welcome to C Y N E F I N"}
-        </div>
-        <div className="display">
-          {props.selectedFriend[0] == null ? (
-            <>
-              <Image height="49" width="49" alt="" src="/vercel.svg" />
-            </>
-          ) : (
-            <Bubbles data={myMessages} />
-          )}
-        </div>
-        <form className="textarea" onSubmit={handleSubmit(onMessageSend)}>
-          <div className="textarea">
-            <input
-              {...register("text", { required: true })}
-              className="text-area"
-              placeholder="Start Texting..."
-            />
-            {/* <Picker set="apple" theme="dark" onSelect={onEmojiClick} /> */}
-            <button className="send-btn" type="submit">
-              Send
-            </button>
+        {props.selectedFriend[0] == null ? (
+          <div className="holder">
+            <h1>Welcome to C Y N E F I N</h1>
           </div>
-        </form>
+        ) : (
+          <>
+            <div className="header">{props.selectedFriend[0]}</div>
+            <div className="display">
+              <Bubbles data={myMessages} />
+            </div>
+            <form className="textarea" onSubmit={handleSubmit(onMessageSend)}>
+              <div className="textarea">
+                <input
+                  {...register("text", { required: true })}
+                  className="text-area"
+                  placeholder="Start Texting..."
+                />
+                {/* <Picker set="apple" theme="dark" onSelect={onEmojiClick} /> */}
+                <button className="send-btn" type="submit">
+                  Send
+                </button>
+              </div>
+            </form>
+          </>
+        )}
       </div>
     </>
   );
