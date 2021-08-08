@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { myFireauth, myFirestore } from "../services/Firebase";
+import Image from "next/image";
 
 interface FriendProps {
   onFriendClick: any;
@@ -19,6 +20,7 @@ const Friends = (props: FriendProps) => {
     <div className="chats">
       {list.map((x: any, i: any) => (
         <div onClick={() => props.onFriendClick(x)} className="chat" key={i}>
+          <Image height="35" width="35" src={x.photoURL} alt="dp" />
           {x.name}
         </div>
       ))}

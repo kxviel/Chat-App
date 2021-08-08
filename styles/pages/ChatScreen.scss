@@ -16,7 +16,16 @@
     font-size: 2.8rem;
     letter-spacing: 0.7rem;
     text-transform: uppercase;
-    @include flexBox(row, flex-start, center);
+    @include flexBox(row, space-between, center);
+    button {
+      border: none;
+      padding: 0.4rem;
+      border-radius: 0.2rem;
+      transition: ease-in;
+      &:hover {
+        transform: translateY(-0.1rem);
+      }
+    }
   }
 
   .main {
@@ -32,25 +41,52 @@
         color: white;
         width: 100%;
         height: 10vh;
+        font-size: 2.2rem;
         @include flexBox(row, center, center);
       }
       .display {
         height: 65vh;
         width: 100%;
-        @include flexBox(column-reverse, none, none);
-        .message {
+        padding: 1rem;
+        font-size: 1.4rem;
+        @include flexBox(column, none, none);
+        // i recieve
+        .message-to {
           width: fit-content;
           background-color: aliceblue;
           border: 2rem;
           padding: 1rem;
           color: #000;
+          margin: 0.5rem 0;
+          border-radius: 20px 20px 20px 3px;
+        }
+        // Im sending
+        .message-from {
+          margin: 0.5rem 0;
+          width: fit-content;
+          background-color: paleturquoise;
+          border: 2rem;
+          padding: 1rem;
+          color: #000;
+          align-self: flex-end;
+          border-radius: 20px 20px 3px 20px;
         }
       }
       .textarea {
+        background-color: #000;
         color: white;
         width: 100%;
         height: 15vh;
-        @include flexBox(row, center, center);
+        @include flexBox(row, space-around, center);
+        .text-area {
+          width: 70%;
+          height: 70%;
+          border-radius: 1.4rem;
+          padding: 1rem;
+          border: none;
+          outline: none;
+          font-size: 1.7rem;
+        }
       }
     }
     .chats {
@@ -60,13 +96,16 @@
       overflow-x: hidden;
       padding: 1rem;
       .chat {
-        padding: 0.2rem;
+        padding: 1rem;
+        border-radius: 1rem;
         background-color: #334756;
         color: snow;
         width: 100%;
-        height: 12%;
+        height: 10%;
         text-align: center;
+        @include flexBox(row, space-around, center);
         margin-bottom: 0.7rem;
+        font-size: 2rem;
       }
     }
   }
