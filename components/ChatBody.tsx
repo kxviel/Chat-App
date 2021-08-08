@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { myFireauth, myFirestore } from "../services/Firebase";
 import Bubbles from "./Bubbles";
 import firebase from "firebase";
 import "emoji-mart/css/emoji-mart.css";
-import { Picker } from "emoji-mart";
-import Image from "next/image";
 
 interface ChatBodyProps {
   selectedFriend: any;
 }
 
 const ChatBody = (props: ChatBodyProps) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [myMessages, setMessages] = useState<any>([]);
-  const [isVisible, setVisible] = useState<boolean>(false);
-  const [chosenEmoji, setChosenEmoji] = useState(null);
-
-  const onEmojiClick = (data: any) => {
-    setChosenEmoji(data.native);
-  };
 
   useEffect(() => {
     const { uid, photoURL, email, displayName }: any = myFireauth.currentUser;
@@ -28,20 +20,30 @@ const ChatBody = (props: ChatBodyProps) => {
       .orderBy("timeStamp")
       .limit(50)
       .onSnapshot((snapShot) => {
-        console.log(snapShot.docs.map((x) => x.data()));
-        setMessages(snapShot.docs.map((x) => x.data()));
+        console.log(
+          snapShot.docs
+            .map((x) => x.data())
+            .filter((x) => x.from === email && x.to === props.selectedFriend[1])
+        );
+        setMessages(
+          snapShot.docs
+            .map((x) => x.data())
+            .filter((x) => x.from === email && x.to === props.selectedFriend[1])
+        );
       });
   }, [props.selectedFriend]);
   const onMessageSend = async (data: any) => {
-    const { uid, photoURL, email, displayName }: any =
-      await myFireauth.currentUser;
+    const { email }: any = myFireauth.currentUser;
     if (data.text.length) {
       const messageToSend = {
         from: `${email}`,
         to: `${props.selectedFriend[1]}`,
         text: data.text,
-        timeStamp: await firebase.firestore.FieldValue.serverTimestamp(),
+        timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
       };
+      reset([""], {
+        keepValues: false,
+      });
       await myFirestore.collection("messages").add(messageToSend);
     } else {
       alert("Enter a Valid Message");
