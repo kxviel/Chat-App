@@ -52,7 +52,7 @@ const ChatBody = (props: ChatBodyProps) => {
       <div className="chat-area">
         {props.selectedFriend[0] == null ? (
           <div className="holder">
-            <h1>Welcome to C Y N E F I N</h1>
+            <h1>Welcome, Lets Chat!</h1>
           </div>
         ) : (
           <>

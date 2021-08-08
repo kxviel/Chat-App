@@ -13,9 +13,10 @@
     height: 10vh;
     width: 100%;
     padding: 0 2rem;
-    font-size: 2.8rem;
+    font-size: 2.1rem;
     letter-spacing: 0.7rem;
     text-transform: uppercase;
+    font-family: "Merienda", cursive;
     @include flexBox(row, space-between, center);
     button {
       border: none;
@@ -93,8 +94,9 @@
         color: white;
         width: 100%;
         height: 15vh;
-        @include flexBox(row, space-around, center);
+        @include flexBox(row, center, center);
         .send-btn {
+          margin-left: 1rem;
           border: none;
           padding: 1rem;
           border-radius: 1.4rem;
@@ -125,6 +127,7 @@
         padding: 1rem;
         border-radius: 1rem;
         background-color: #334756;
+
         color: snow;
         width: 100%;
         height: 10%;
@@ -132,6 +135,10 @@
         @include flexBox(row, space-around, center);
         margin-bottom: 0.7rem;
         font-size: 2rem;
+        &:hover {
+          box-shadow: 0.2rem 0.2rem 0.7rem 0 rgb(68, 68, 68);
+          cursor: pointer;
+        }
         .dp {
           border-radius: 50%;
         }
