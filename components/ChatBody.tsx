@@ -14,17 +14,12 @@ const ChatBody = (props: ChatBodyProps) => {
   const [myMessages, setMessages] = useState<any>([]);
 
   useEffect(() => {
-    const { uid, photoURL, email, displayName }: any = myFireauth.currentUser;
+    const { email }: any = myFireauth.currentUser;
     myFirestore
       .collection("messages")
       .orderBy("timeStamp")
       .limit(50)
       .onSnapshot((snapShot) => {
-        console.log(
-          snapShot.docs
-            .map((x) => x.data())
-            .filter((x) => x.from === email && x.to === props.selectedFriend[1])
-        );
         setMessages(
           snapShot.docs
             .map((x) => x.data())
@@ -32,6 +27,7 @@ const ChatBody = (props: ChatBodyProps) => {
         );
       });
   }, [props.selectedFriend]);
+
   const onMessageSend = async (data: any) => {
     const { email }: any = myFireauth.currentUser;
     if (data.text.length) {
