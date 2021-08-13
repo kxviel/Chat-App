@@ -75,10 +75,9 @@ const ChatBody = (props: ChatBodyProps) => {
         ) : (
           <>
             <div className="header">{props.selectedFriend[0]}</div>
-            <div className="display">
+            <div className="display" ref={messagesEndRef}>
               <Bubbles data={allMessages} />
             </div>
-            <div ref={messagesEndRef} />
             <form className="textarea" onSubmit={handleSubmit(onMessageSend)}>
               <div className="textarea">
                 <input
