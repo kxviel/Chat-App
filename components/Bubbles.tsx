@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { myFireauth } from "../services/Firebase";
 
 interface BubbleProps {
@@ -5,12 +6,20 @@ interface BubbleProps {
 }
 
 const Bubbles = (props: BubbleProps) => {
-  const { uid, photoURL, email, displayName }: any = myFireauth.currentUser;
-  console.log(props.data);
+  const { email }: any = myFireauth.currentUser;
+  const [sorted, setSorted] = useState<any>([]);
+
+  useEffect(() => {
+    props.data.sort(
+      (a: { timeStamp: number }, b: { timeStamp: number }) =>
+        b.timeStamp - a.timeStamp
+    );
+    setSorted(props.data);
+  }, [props.data]);
 
   return (
     <>
-      {props.data.map((x: any, i: any) => (
+      {sorted.map((x: any, i: any) => (
         <div
           key={i}
           className={x.from === email ? "message-from" : "message-to"}

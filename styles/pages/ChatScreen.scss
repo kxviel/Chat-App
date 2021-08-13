@@ -62,7 +62,7 @@
           display: grid;
           place-items: center;
         }
-        @include flexBox(column, none, none);
+        @include flexBox(column-reverse, none, none);
         // i recieve
         .message-to {
           width: fit-content;

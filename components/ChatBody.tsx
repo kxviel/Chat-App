@@ -11,42 +11,40 @@ interface ChatBodyProps {
 
 const ChatBody = (props: ChatBodyProps) => {
   const { register, handleSubmit, reset } = useForm();
-  const [myMessages, setMyMessages] = useState<any>([]);
-  const [theirMessages, setTheirMessages] = useState<any>([]);
-
+  const [allMessages, setMessages] = useState<any>([]);
+  const messagesEndRef = useRef<any>(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current.addEventListener(
+      "DOMNodeInserted",
+      (event: { currentTarget: any }) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+      }
+    );
+  };
   useEffect(() => {
     const { email }: any = myFireauth.currentUser;
     if (props.selectedFriend[1] !== undefined) {
       myFirestore
         .collection("messages")
-        .orderBy("timeStamp")
         .limit(1000)
         .onSnapshot((snapShot) => {
-          console.log(
-            snapShot.docs
-              .map((x) => x.data())
-              .filter(
-                (x) => x.from === email && x.to === props.selectedFriend[1]
-              )
-          );
-
-          //To Me<=>From Them
-          setTheirMessages(
-            snapShot.docs
+          setMessages([
+            //To Me<=>From Them
+            ...snapShot.docs
               .map((x) => x.data())
               .filter(
                 (x) => x.to === email && x.from === props.selectedFriend[1]
-              )
-          );
-          //To Them<=>From Me
-          setMyMessages(
-            snapShot.docs
+              ),
+            //To Them<=>From Me
+            ...snapShot.docs
               .map((x) => x.data())
               .filter(
                 (x) => x.to === props.selectedFriend[1] && x.from === email
-              )
-          );
+              ),
+          ]);
         });
+      scrollToBottom();
     }
   }, [props.selectedFriend]);
 
@@ -57,7 +55,7 @@ const ChatBody = (props: ChatBodyProps) => {
         from: `${email}`,
         to: `${props.selectedFriend[1]}`,
         text: data.text,
-        timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+        timeStamp: new Date().getTime(),
       };
       reset([""], {
         keepValues: false,
@@ -78,8 +76,9 @@ const ChatBody = (props: ChatBodyProps) => {
           <>
             <div className="header">{props.selectedFriend[0]}</div>
             <div className="display">
-              <Bubbles data={[...myMessages, ...theirMessages]} />
+              <Bubbles data={allMessages} />
             </div>
+            <div ref={messagesEndRef} />
             <form className="textarea" onSubmit={handleSubmit(onMessageSend)}>
               <div className="textarea">
                 <input
