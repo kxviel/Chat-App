@@ -4,8 +4,9 @@ import Landing from "../components/Landing";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import Head from "next/head";
+import { NextPage } from "next";
 
-export default function Home() {
+const Home: NextPage = () => {
   const [user, setUser] = useState(() => myFireauth.currentUser);
   const [init, setInit] = useState(true);
 
@@ -47,4 +48,5 @@ export default function Home() {
       {user ? <ChatScreen /> : <Landing signIn={() => signInWithGoogle()} />}
     </>
   );
-}
+};
+export default Home;

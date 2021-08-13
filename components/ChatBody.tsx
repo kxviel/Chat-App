@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { myFireauth, myFirestore } from "../services/Firebase";
 import Bubbles from "./Bubbles";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "emoji-mart/css/emoji-mart.css";
 
 interface ChatBodyProps {
@@ -11,21 +11,43 @@ interface ChatBodyProps {
 
 const ChatBody = (props: ChatBodyProps) => {
   const { register, handleSubmit, reset } = useForm();
-  const [myMessages, setMessages] = useState<any>([]);
+  const [myMessages, setMyMessages] = useState<any>([]);
+  const [theirMessages, setTheirMessages] = useState<any>([]);
 
   useEffect(() => {
     const { email }: any = myFireauth.currentUser;
-    myFirestore
-      .collection("messages")
-      .orderBy("timeStamp")
-      .limit(50)
-      .onSnapshot((snapShot) => {
-        setMessages(
-          snapShot.docs
-            .map((x) => x.data())
-            .filter((x) => x.from === email && x.to === props.selectedFriend[1])
-        );
-      });
+    if (props.selectedFriend[1] !== undefined) {
+      myFirestore
+        .collection("messages")
+        .orderBy("timeStamp")
+        .limit(1000)
+        .onSnapshot((snapShot) => {
+          console.log(
+            snapShot.docs
+              .map((x) => x.data())
+              .filter(
+                (x) => x.from === email && x.to === props.selectedFriend[1]
+              )
+          );
+
+          //To Me<=>From Them
+          setTheirMessages(
+            snapShot.docs
+              .map((x) => x.data())
+              .filter(
+                (x) => x.to === email && x.from === props.selectedFriend[1]
+              )
+          );
+          //To Them<=>From Me
+          setMyMessages(
+            snapShot.docs
+              .map((x) => x.data())
+              .filter(
+                (x) => x.to === props.selectedFriend[1] && x.from === email
+              )
+          );
+        });
+    }
   }, [props.selectedFriend]);
 
   const onMessageSend = async (data: any) => {
@@ -56,7 +78,7 @@ const ChatBody = (props: ChatBodyProps) => {
           <>
             <div className="header">{props.selectedFriend[0]}</div>
             <div className="display">
-              <Bubbles data={myMessages} />
+              <Bubbles data={[...myMessages, ...theirMessages]} />
             </div>
             <form className="textarea" onSubmit={handleSubmit(onMessageSend)}>
               <div className="textarea">

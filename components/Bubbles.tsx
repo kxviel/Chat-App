@@ -6,6 +6,8 @@ interface BubbleProps {
 
 const Bubbles = (props: BubbleProps) => {
   const { uid, photoURL, email, displayName }: any = myFireauth.currentUser;
+  console.log(props.data);
+
   return (
     <>
       {props.data.map((x: any, i: any) => (
