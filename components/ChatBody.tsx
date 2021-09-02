@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { myFireauth, myFirestore } from "../services/Firebase";
 import Bubbles from "./Bubbles";
 import firebase from "firebase/app";
-import "emoji-mart/css/emoji-mart.css";
 
 interface ChatBodyProps {
   selectedFriend: any;

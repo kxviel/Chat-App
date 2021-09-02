@@ -27,7 +27,7 @@ const Friends = (props: FriendProps) => {
             src={x.photoURL}
             alt="dp"
           />
-          {x.name}
+          <p>{x.name}</p>
         </div>
       ))}
     </div>
