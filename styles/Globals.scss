@@ -1,14 +1,14 @@
 // ========================================
 // Constants
 // ========================================
-@import "./constants/animations";
-@import "./constants/base";
-@import "./constants/mixins";
-@import "./constants/variables";
-@import "./constants/fonts";
+@import "./abstracts/animations";
+@import "./base/resets";
+@import "./abstracts/mixins";
+@import "./abstracts/variables";
+@import "./base/fonts";
 
 // ========================================
 // Page Styles
 // ========================================
-@import "./pages/ChatScreen.scss";
-@import "./pages/Auth.scss";
+@import "./pages/Landing.scss";
+@import "./layout/navbar";

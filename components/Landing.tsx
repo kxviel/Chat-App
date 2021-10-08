@@ -1,3 +1,7 @@
+import { Text, Flex, Button, Input } from "@chakra-ui/react";
+import Image from "next/image";
+import Navbar from "../layout/Navbar";
+
 interface LandingProps {
   signIn: any;
 }
@@ -5,18 +9,26 @@ interface LandingProps {
 const Landing = (props: LandingProps) => {
   return (
     <>
-      <div className="auth-root">
-        <div className="header">
-          <p className="my-brand">
-            <span>お</span>
-            <span>喋</span>
-            <span>り</span>
-          </p>
-          <button className="login" onClick={props.signIn}>
-            Lets Chat
-          </button>
-        </div>
-      </div>
+      <Navbar />
+      <Flex h={["76vh", "88vh"]} w="100vw" p="1.4rem" className="landing">
+        <Flex
+          w={["100%", "65%"]}
+          direction="column"
+          align="start"
+          justify="center"
+          className="landing__title"
+        >
+          <Text w="100%">Pharmacopoeia You Can Trust.</Text>
+          <Text w="100%">Safe and accurate using the openFDA API</Text>
+
+          <Button mt="0.7rem" h="7vh" size="md" onClick={props.signIn}>
+            Get Started
+          </Button>
+        </Flex>
+        <Flex display={["none", "flex"]} w="35%" className="landing__logo">
+          <Image src="/illustration.svg" height={350} width={350} alt="logo" />
+        </Flex>
+      </Flex>
     </>
   );
 };
