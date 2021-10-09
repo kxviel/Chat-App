@@ -2,16 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { myFireauth, myFirestore } from "../../services/Firebase";
 import Bubbles from "./Bubbles";
-import firebase from "firebase/app";
+import Image from "next/image";
 import {
   Text,
   Flex,
   FormControl,
-  FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Button,
-  Avatar,
   Input,
 } from "@chakra-ui/react";
 
@@ -80,18 +77,23 @@ const ChatBody = (props: ChatBodyProps) => {
     <>
       <Flex h="100%" w="77vw" direction="column">
         {props.selectedFriend[0] == null ? (
-          <Flex
-            align="center"
-            justify="center"
-            h="8vh"
-            w="100%"
-            bg="betaT"
-            p="0.7rem"
-          >
-            <Text fontSize="2xl" fontWeight="500">
-              Start a Chat
-            </Text>
-          </Flex>
+          <>
+            <Flex
+              align="center"
+              justify="center"
+              h="8vh"
+              w="100%"
+              bg="betaT"
+              p="0.7rem"
+            >
+              <Text fontSize="2xl" fontWeight="500">
+                Start a Chat
+              </Text>
+            </Flex>
+            <Flex align="center" justify="center" h="77vh" w="100%" p="0.7rem">
+              <Image src="/begin.svg" height={350} width={350} alt="logo" />
+            </Flex>
+          </>
         ) : (
           <>
             <Flex

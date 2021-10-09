@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Text,
-  Flex,
-  IconButton,
-  Button,
-  Avatar,
-  VStack,
-  color,
-} from "@chakra-ui/react";
+import { Text, Flex, useColorMode, Avatar, VStack } from "@chakra-ui/react";
 import { myFireauth, myFirestore } from "../../services/Firebase";
 import Image from "next/image";
 
@@ -17,6 +9,7 @@ interface FriendProps {
 
 const Friends = (props: FriendProps) => {
   const [list, setList] = useState<any>([]);
+  const { colorMode, toggleColorMode } = useColorMode();
   useEffect(() => {
     const { uid, photoURL, displayName, email }: any = myFireauth.currentUser;
     myFirestore.collection("users").onSnapshot((snapShot) => {
@@ -35,19 +28,24 @@ const Friends = (props: FriendProps) => {
           onClick={() => props.onFriendClick(x)}
           key={i}
           width="98%"
-          bg="#fff"
+          bg={colorMode === "light" ? "white" : "blackAlpha.500"}
           borderBottom="1px"
           borderColor="gray.200"
           align="center"
           justify="space-between"
           _hover={{
             cursor: "pointer",
-            color: "#002",
-            bg: "gamma",
+            bg: colorMode === "light" ? "beta" : "blackAlpha.700",
           }}
         >
           <Avatar size="md" name="Dan Abrahmov" src={x.photoURL} />
-          <Text w="70%" fontSize="xl" fontWeight="400" textAlign="center">
+          <Text
+            color={colorMode === "light" ? "black" : "white"}
+            w="70%"
+            fontSize="xl"
+            fontWeight="400"
+            textAlign="center"
+          >
             {x.name}
           </Text>
         </Flex>

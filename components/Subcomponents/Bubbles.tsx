@@ -1,16 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { myFireauth } from "../../services/Firebase";
-import {
-  Text,
-  Flex,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Button,
-  Avatar,
-  Input,
-} from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 interface BubbleProps {
   data: any;
 }
@@ -53,7 +43,7 @@ const Bubbles = (props: BubbleProps) => {
             mt="2"
             mb="2"
           >
-            {x.text}
+            <Text color="black">{x.text}</Text>
           </Flex>
         ))}
       </Flex>
