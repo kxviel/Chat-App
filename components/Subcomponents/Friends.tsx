@@ -35,7 +35,7 @@ const Friends = (props: FriendProps) => {
           justify="space-between"
           _hover={{
             cursor: "pointer",
-            bg: colorMode === "light" ? "beta" : "blackAlpha.700",
+            bg: colorMode === "light" ? "gamma" : "blackAlpha.700",
           }}
         >
           <Avatar size="md" name="Dan Abrahmov" src={x.photoURL} />

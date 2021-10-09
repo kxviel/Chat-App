@@ -14,14 +14,18 @@ const Landing = (props: LandingProps) => {
         <Flex
           w={["100%", "65%"]}
           direction="column"
-          align="start"
+          align="center"
           justify="center"
           className="landing__title"
         >
-          <Text w="100%">Chat App</Text>
-          <Text w="100%">Safe • Efficient • Worthwhile</Text>
+          <Text w="100%" textAlign="center">
+            Chat App
+          </Text>
+          <Text w="100%" textAlign="center">
+            Safe • Efficient • Worthwhile
+          </Text>
           <Button
-            variant="primary"
+            variant="secondary"
             mt="0.7rem"
             h="7vh"
             size="md"

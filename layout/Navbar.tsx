@@ -23,15 +23,15 @@ const Navbar = () => {
         justify="end"
         className="nav__items"
       >
-        <Text w={["33%", "28%"]} textAlign="center" mr="2.1rem">
+        <Text w={["33%", "21%"]} textAlign="center" mr="1.4rem">
           <a href="mailto:kevkanae777@gmail.com">Contact</a>
         </Text>
-        <Text w={["33%", "28%"]} textAlign="center">
+        <Text w={["33%", "21%"]} textAlign="center">
           <a href="https://github.com/kevkanae/Chat-App">Contribute</a>
         </Text>
         <IconButton
-          w={["33%", "20%"]}
-          variant="primary"
+          w={["21%", "14%"]}
+          variant="secondary"
           ml="2.4rem"
           icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           onClick={toggleColorMode}
