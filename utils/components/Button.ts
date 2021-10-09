@@ -7,7 +7,15 @@ export const ButtonStyles = {
       bg: "alpha",
       color: "#222",
       _hover: {
-        bg: mode(whiten("beta", 20), darken("alpha", 20))(props),
+        bg: mode(whiten("alpha", 20), darken("alpha", 20))(props),
+        boxShadow: "md",
+      },
+    }),
+    secondary: (props: Theme) => ({
+      bg: "gamma",
+      color: "#222",
+      _hover: {
+        bg: mode(whiten("gamma", 20), darken("gamma", 20))(props),
         boxShadow: "md",
       },
     }),

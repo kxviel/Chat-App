@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
 import { myFireauth, myFirestore } from "../services/Firebase";
-import ChatBody from "./ChatBody";
-import Friends from "./Friends";
+import { Flex } from "@chakra-ui/react";
+import ChatBody from "./Subcomponents/ChatBody";
+import Friends from "./Subcomponents/Friends";
+import { useEffect, useState } from "react";
+import ChatNav from "../layout/ChatNav";
 
 const ChatScreen = () => {
   const [currentFriend, setCurrentFriend] = useState<any>({});
@@ -26,20 +28,17 @@ const ChatScreen = () => {
 
   return (
     <>
-      <div className="home">
-        <div className="appbar">
-          <p>Cynefin</p>
-          <button className="logout" onClick={() => myFireauth.signOut()}>
-            Logout
-          </button>
-        </div>
-        <div className="main">
-          <Friends onFriendClick={(data: any) => setCurrentFriend(data)} />
-          <ChatBody
-            selectedFriend={[currentFriend.name, currentFriend.email]}
-          />
-        </div>
-      </div>
+      <ChatNav />
+      <Flex
+        h={["76vh", "88vh"]}
+        w="100vw"
+        p="0.7rem"
+        className="chat"
+        justify="space-between"
+      >
+        <Friends onFriendClick={(data: any) => setCurrentFriend(data)} />
+        <ChatBody selectedFriend={[currentFriend.name, currentFriend.email]} />
+      </Flex>
     </>
   );
 };

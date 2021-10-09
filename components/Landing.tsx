@@ -18,8 +18,8 @@ const Landing = (props: LandingProps) => {
           justify="center"
           className="landing__title"
         >
-          <Text w="100%">Pharmacopoeia You Can Trust.</Text>
-          <Text w="100%">Safe and accurate using the openFDA API</Text>
+          <Text w="100%">Chat App</Text>
+          <Text w="100%">Safe • Efficient • Worthwhile</Text>
           <Button
             variant="primary"
             mt="0.7rem"
