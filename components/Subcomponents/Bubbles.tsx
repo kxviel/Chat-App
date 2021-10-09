@@ -30,7 +30,13 @@ const Bubbles = (props: BubbleProps) => {
 
   return (
     <>
-      <Flex direction="column-reverse" h="70vh" ref={messagesEndRef} p="7">
+      <Flex
+        overflowY="scroll"
+        direction="column-reverse"
+        h="70vh"
+        ref={messagesEndRef}
+        p="7"
+      >
         {sorted.map((x: any, i: any) => (
           <Flex
             key={i}

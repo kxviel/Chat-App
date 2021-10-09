@@ -30,7 +30,7 @@ const Friends = (props: FriendProps) => {
           width="98%"
           bg={colorMode === "light" ? "white" : "blackAlpha.500"}
           borderBottom="1px"
-          borderColor="gray.200"
+          borderColor={colorMode === "light" ? "gray.200" : "gray.700"}
           align="center"
           justify="space-between"
           _hover={{
